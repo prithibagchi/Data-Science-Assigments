@@ -1,0 +1,112 @@
+#importing the packeges
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#loding the data
+car = pd.read_csv(r"C:\Users\D\Desktop\New Assignments  Keys\Datasets\Q1_a.csv")
+
+car.describe()##describe the data
+car.info()
+car.head()##printing the first 5 colloumns
+
+# Exploratory Data Analysis
+# Measures of Central Tendency / First moment business decision(mean, median, mode)
+car.speed.mean() # '.' is used to refer to the variables within object
+car.speed.median()
+car.dist.mean()
+car.dist.median()
+
+# Measures of Dispersion / Second moment business decision(var, std, renge)
+car.speed.var()# variance
+cer.speed.std()# standerd deviation
+car.dist.var()
+car.dist.std()
+
+# Third moment business decision
+car.speed.skew()
+car.dist.skew()
+
+# Fourth moment business decision
+car.speed.kurt()
+car.dist.kurt()
+
+plt.hist(car.speed,color='blue') #histogram
+plt.hist(car.dist, color='red')
+sns.boxplot(car.speed) #boxplot
+sns.boxplot(car.dist) #boxplot
+
+#Treating the outliers 
+IQR = car['dist'].quantile(0.75) - car['dist'].quantile(0.25)
+lower_limit = car['dist'].quantile(0.25) - (IQR * 1.5)
+upper_limit = car['dist'].quantile(0.75) + (IQR * 1.5)
+car['dist']=np.where(car['dist']>=upper_limit,upper_limit,car['dist'])
+sns.boxplot(car.dist)
+
+
+#Q1) Calculate Skewness, Kurtosis using R/Python code & draw inferences on the following data.
+#Hint: [Insights drawn from the data such as data is normally distributed/not, outliers, measures such as mean, median, mode, variance, std. deviation]
+#b. Top Speed (SP) and Weight (WT)
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+top = pd.read_csv(r"C:\Users\D\Desktop\New Assignments  Keys\Datasets\Q2_b.csv")
+top.info()
+top.describe()
+# Exploratory Data Analysis
+# 
+top.SP.mean() # '.' is used to refer to the variables within object
+top.SP.median()
+top.SP.mode()
+top.SP.std()
+top.SP.var()
+top.SP.skew()
+top.SP.kurt()
+top.WT.median()
+top.WT.mean()
+top.WT.mode()
+top.WT.var()
+top.WT.std()
+top.WT.skew()
+top.WT.kurt()
+
+plt.hist(top.SP,color='blue') #histogram
+plt.hist(top.WT,color='red') #histogram
+plt.boxplot(top.SP)
+plt.boxplot(top.WT)
+
+#outlier treatment
+IQR = top['SP'].quantile(0.75) - top['SP'].quantile(0.25)
+lower_limit = top['SP'].quantile(0.25) - (IQR * 1.5)
+upper_limit = top['SP'].quantile(0.75) + (IQR * 1.5)
+top['SP']=np.where(top['SP']>=upper_limit,upper_limit,top['SP'])
+sns.boxplot(top.SP)
+
+IQR = top['WT'].quantile(0.75) - top['WT'].quantile(0.25)
+lower_limit = top['WT'].quantile(0.25) - (IQR * 1.5)
+upper_limit = top[WT'].quantile(0.75) + (IQR * 1.5)
+top['WT']=np.where(top['WT']>=upper_limit,upper_limit,top['WT'])
+sns.boxplot(top.WT)
+
+#Q3) Below are the scores obtained by a student in tests
+#34,36,36,38,38,39,39,40,40,41,41,41,41,42,42,45,49,56
+#1) Find mean, median, variance, standard deviation.
+#2) What can we say about the student marks? [Hint: Looking at the various measures calculated above whether the data is normal/skewed or if outliers are present].
+
+a = [34,36,36,38,38,39,39,40,40,41,41,41,41,42,42,45,49,56]
+b = pd.DataFrame(a)
+print('Mean\t\t\t',b[0].mean())
+print('Median\t\t\t',b[0].median())
+print('Variance\t\t',b[0].var())
+print('Standard Deviation\t',b[0].std())
+
+
+print('Skewness\t',b[0].skew())
+print('Kurtosis\t',b[0].kurt())
+
+import seaborn as sns
+sns.boxplot(b[0]);plt.show()
+sns.histplot(b[0]);plt.show()
+
+
